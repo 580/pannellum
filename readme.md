@@ -1,6 +1,6 @@
 # Pannellum
 
-[![Build Status](https://app.travis-ci.com/mpetroff/pannellum.svg?branch=master)](https://app.travis-ci.com/github/mpetroff/pannellum)
+[![CI](https://github.com/mpetroff/pannellum/actions/workflows/ci.yaml/badge.svg)](https://github.com/mpetroff/pannellum/actions/workflows/ci.yaml)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3334433.svg)](https://doi.org/10.5281/zenodo.3334433)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.01628/status.svg)](https://doi.org/10.21105/joss.01628)
 
@@ -86,11 +86,10 @@ Additional examples are available at [pannellum.org](https://pannellum.org/docum
 Since Pannellum is built with web standards, it requires a modern browser to function.
 
 #### Full support (with appropriate graphics drivers):
-* Firefox 23+
-* Chrome 24+
-* Safari 8+
-* Internet Explorer 11+
-* Edge
+* Firefox 40+
+* Chrome 41+
+* Safari 9+
+* Edge 12+
 
 The support list is based on feature support. As only recent browsers are tested, there may be regressions in older browsers.
 
@@ -135,13 +134,16 @@ port is selected, along with other arguments. One can see usage via:
 $ python tests/run_tests.py --help
 ```
 
-Continuous integration tests are run via [Travis CI](https://travis-ci.org/mpetroff/pannellum). Running the tests locally requires Python 3, the Selenium Python bindings, [Pillow](https://pillow.readthedocs.io/), [NumPy](https://www.numpy.org/), and either Firefox & [geckodriver](https://github.com/mozilla/geckodriver) or Chrome & [ChromeDriver](https://chromedriver.chromium.org/).
+Continuous integration tests are run via [GitHub Actions](https://github.com/mpetroff/pannellum/actions/workflows/ci.yaml). Running the tests locally requires Python 3, the Selenium Python bindings, [Pillow](https://pillow.readthedocs.io/), [NumPy](https://www.numpy.org/), and either Firefox & [geckodriver](https://github.com/mozilla/geckodriver) or Chrome & [ChromeDriver](https://chromedriver.chromium.org/).
 
 ## Seeking support
 If you wish to ask a question or report a bug, please open an issue at [github.com/mpetroff/pannellum](https://github.com/mpetroff/pannellum). See the _Contributing_ section below for more details.
 
 ## Contributing
 Development takes place at [github.com/mpetroff/pannellum](https://github.com/mpetroff/pannellum). Issues should be opened to report bugs or suggest improvements (or ask questions), and pull requests are welcome. Please make an attempt to write in grammatically-correct English on the issue tracker; using the results of machine translation is acceptable if one in not fluent in the language, and attempts to work past language barriers will be made. When reporting a bug, please try to include a minimum reproducible example (or at least some sort of example). When proposing changes, please try to match the existing code style, e.g., four space indentation and [JSHint](https://jshint.com/) validation. If your pull request adds an additional configuration parameter, please document it in `doc/json-config-parameters.md`. Pull requests should preferably be created from [feature branches](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow).
+
+## LLM policy
+Output of large language models (LLMs) should not be used in issues or other written communications. Use of such output is disrespectful to the maintainer's time, and any issues that appear to be written by LLMs will be closed. The only exception to this rule is for machine translation into English. LLM-written code in pull requests is not strictly prohibited but must be declared and will be considered on a case-by-case basis; the pull request's author must assume fully responsibility for it, and any corresponding documentation must be written without the use of LLMs.
 
 ## License
 Pannellum is distributed under the MIT License. For more information, read the file `COPYING` or peruse the license [online](https://github.com/mpetroff/pannellum/blob/master/COPYING).

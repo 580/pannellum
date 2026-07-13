@@ -1,6 +1,6 @@
 /*
  * Pannellum - An HTML5 based Panorama Viewer
- * Copyright (c) 2011-2025 Matthew Petroff
+ * Copyright (c) 2011-2026 Matthew Petroff
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -371,7 +371,7 @@ function init() {
         
         var onError = function(e) {
             var a = document.createElement('a');
-            a.href = e.target.src;
+            a.href = sanitizeURL(e.target.src, true);
             a.textContent = a.href;
             anError(config.strings.fileAccessError.replace('%s', a.outerHTML));
         };
@@ -419,7 +419,7 @@ function init() {
                 if (xhr.status != 200) {
                     // Display error if image can't be loaded
                     var a = document.createElement('a');
-                    a.href = p;
+                    a.href = sanitizeURL(p, true);
                     a.textContent = a.href;
                     anError(config.strings.fileAccessError.replace('%s', a.outerHTML));
                     return;
@@ -1907,7 +1907,19 @@ function createHotSpot(hs) {
         a.href = sanitizeURL(hs.URL, true);
         if (hs.attributes) {
             for (var key in hs.attributes) {
-                a.setAttribute(key, hs.attributes[key]);
+                // The setAttribute method converts the key to a lowercase
+                // string, so we do this conversion ourselves, before examining
+                // it (and we also remove all non-ASCII characters)
+                key = String(key).toLowerCase().replace(/[^a-z]/g, '');
+                if (!initialConfig.escapeHTML ||
+                    (!key.startsWith('on') && !key.includes('href'))) {
+                    // setAttribute is an injection sink, so we need to filter
+                    // out HTML event handler attributes and href (which is
+                    // specifically sanitized above) to avoid XSS
+                    a.setAttribute(key, hs.attributes[key]);
+                } else {
+                    console.log('Hot spot attribute skipped.');
+                }
             }
         } else if (config.targetBlank) {
             a.target = '_blank';
